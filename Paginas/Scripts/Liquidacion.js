@@ -106,7 +106,8 @@ function ProcesarLiquidacion(Comando) {
         Correo: Correo,
         Ocupacion: Ocupacion,
         DiasTrabajados: DiasTrabajados,
-        Salario: Salario
+        Salario: Salario,
+        Comando:Comando
     }
     console.log(DatosLiquidacion);
 

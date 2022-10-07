@@ -30,6 +30,7 @@ namespace NatilleraCliente.Modelos
         public Double Sena { get; set; }
         public Double Pension { get; set; }
         public Double Salud { get; set; }
+        public Double TotalLiquidacion { get; set; }
 
         public string Comando { get; set; }
         public string Error { get; set; }
