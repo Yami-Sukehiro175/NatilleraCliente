@@ -127,6 +127,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Paginas\Ahorro.html" />
     <Content Include="Paginas\Estilos\adminlte.css" />
     <Content Include="Paginas\Estilos\adminlte.min.css" />
     <Content Include="Paginas\Estilos\all.min.css" />
@@ -135,6 +136,8 @@
     <Content Include="Paginas\Estilos\dataTables.min.css" />
     <Content Include="Paginas\Estilos\styles.css" />
     <Content Include="Paginas\Liquidacion.html" />
+    <Content Include="Paginas\Prestamo.html" />
+    <Content Include="Paginas\Registro.html" />
     <Content Include="Paginas\Scripts\Comunes\Combos.js" />
     <Content Include="Paginas\Scripts\Comunes\Grids.js" />
     <Content Include="Paginas\Scripts\Liquidacion.js" />
