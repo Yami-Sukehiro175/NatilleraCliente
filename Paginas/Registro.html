@@ -1,10 +1,167 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro Cliente</title>
 
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link href="Estilos/all.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="Estilos/dataTables.min.css" rel="stylesheet" />
+    <link href="Estilos/adminlte.min.css" rel="stylesheet" />
+    <link href="Estilos/dataTables.bootstrap4.min.css" rel="stylesheet" />
+</head>
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Registro Cliente</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form id="frmFactura">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="TxtIdCliente">Identificacion Cliente</label>
+                                            <input type="text" class="form-control" id="TxtIdCliente" placeholder="Identificacion Cliente" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="TxtNombreCliente">Nombre Cliente</label>
+                                            <input type="text" class="form-control" id="TxtNombreCliente" placeholder="Nombre Cliente">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="TxtFechaNacimiento">Fecha Nacimiento</label>
+                                            <input type="date" class="form-control" id="TxtFechaNacimiento" placeholder="Fecha Nacimiento">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="TxtFechaIngreso">Fecha Ingreso</label>
+                                            <input type="date" class="form-control" id="TxtFechaIngreso" placeholder="Fecha Ingreso">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="TxtDireccion">Direccion</label>
+                                            <input type="text" class="form-control" id="TxtDireccion" placeholder="Direccion">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="cboCiudad">Ciudad</label>
+                                            <select id="cboCiudad" class="form-control select2" style="width: 100%;">
+                                                <option value="0">Seleccione una Ciudad</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="cboCuenta">Tipo de Cuenta</label>
+                                            <select id="cboCuenta" class="form-control select2" style="width: 100%;">
+                                                <option value="0">Seleccione un tipo de cuenta</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="TxtNumeroCuenta">Numero de Cuenta</label>
+                                            <input type="text" class="form-control" id="TxtNumeroCuenta" placeholder="Numero Cuenta">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="cboBanco">Banco</label>
+                                            <select id="cboBanco" class="form-control select2" style="width: 100%;">
+                                                <option value="0">Seleccione un Banco</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtTelefono">Telefono</label>
+                                            <input type="text" class="form-control" id="txtTelefono" placeholder="Ingrese su Télefono">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtCelular">Celular</label>
+                                            <input type="text" class="form-control" id="txtCelular" placeholder="Ingrese su Celular">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtCorreo">Correo</label>
+                                            <input type="email" class="form-control" id="txtCorreo" placeholder="Ingrese Telefono">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtOcupacion">Ocupacion</label>
+                                            <input type="text" class="form-control" id="txtOcupacion" placeholder="Ingrese su Ocupación">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <button type="button" id="btnInsertar" class="btn-block btn-lg btn-success">Insertar</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" id="btnConsultar" class="btn-block btn-lg btn-primary">Consultar</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" id="btnActualizar" class="btn-block btn-lg btn-warning">Actualizar</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" id="btnEliminar" class="btn-block btn-lg btn-danger">Eliminar</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table id="tblClientes" class="table table-bordered table-striped">
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <div id="dvMensaje" class=""></div>
+                            </div>
+                            <div class="card-footer">
+                                <div id="dvMensaje2" class=""></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="../Scripts/jquery.min.js"></script>
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/jquery.dataTables.min.js"></script>
+    <script src="../Scripts/dataTables.bootstrap4.min.js"></script>
+    <script src="../Scripts/WebForms/jquery.dataTables.min.js"></script>
+    <script src="Scripts/Comunes/Grids.js"></script>
+    <script src="Scripts/Comunes/Combos.js"></script>
+    <script src="Scripts/Registro.js"></script>
+    <!-- /.card -->
 </body>
 </html>
