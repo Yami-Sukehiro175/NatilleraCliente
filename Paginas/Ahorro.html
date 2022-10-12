@@ -1,10 +1,125 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro Cliente</title>
 
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link href="Estilos/all.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="Estilos/dataTables.min.css" rel="stylesheet" />
+    <link href="Estilos/adminlte.min.css" rel="stylesheet" />
+    <link href="Estilos/dataTables.bootstrap4.min.css" rel="stylesheet" />
+</head>
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Ingreso de Ahorro</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form id="frmFactura">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtIdAhorro">Identificador Ahorro</label>
+                                            <input type="number" class="form-control" id="txtIdAhorro" placeholder="Identificador Ahorro" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="cboCliente">Cliente</label>
+                                            <select id="cboCliente" class="form-control select2" style="width: 100%;" onchange="llenarCamposCliente()">
+                                                <option value="0">Seleccione un Cliente</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtBanco">Banco</label>
+                                            <input type="text" class="form-control" id="txtBanco" placeholder="Nombre Banco" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtTipoCuenta">Tipo de Cuenta</label>
+                                            <input type="text" class="form-control" id="txtTipoCuenta" placeholder="Tipo Cuenta" readonly>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtCuenta">Numero de cuenta</label>
+                                            <input type="number" class="form-control" id="txtCuenta" placeholder="Numero Cuenta" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtFechaAhorro">Fecha Ahorro</label>
+                                            <input type="date" class="form-control" id="txtFechaAhorro" placeholder="Fecha Ahorro">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="txtCantidadAhorro">Dinero A ahorrar</label>
+                                            <input type="number" class="form-control" id="txtCantidadAhorro" placeholder="Cantidad Ahorro">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <button type="button" id="btnInsertar" class="btn-block btn-lg btn-success">Insertar</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" id="btnConsultar" class="btn-block btn-lg btn-primary">Consultar</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" id="btnActualizar" class="btn-block btn-lg btn-warning">Actualizar</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" id="btnEliminar" class="btn-block btn-lg btn-danger">Eliminar</button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table id="tblAhorros" class="table table-bordered table-striped">
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <div id="dvMensaje" class=""></div>
+                            </div>
+                            <div class="card-footer">
+                                <div id="dvMensaje2" class=""></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="../Scripts/jquery.min.js"></script>
+    <script src="../Scripts/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/jquery.dataTables.min.js"></script>
+    <script src="../Scripts/dataTables.bootstrap4.min.js"></script>
+    <script src="../Scripts/WebForms/jquery.dataTables.min.js"></script>
+    <script src="Scripts/Comunes/Grids.js"></script>
+    <script src="Scripts/Comunes/Combos.js"></script>
+    <script src="Scripts/Ahorro.js"></script>
+    <!-- /.card -->
 </body>
 </html>
