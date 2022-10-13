@@ -1,7 +1,4 @@
-﻿//Código para garantizar que se ejecute el código cuando termine de cargar la página
-$(document).ready(function () {
-    //Defino la funcionalidad de la página
-    //Funcionalidad del botón "Registrar"
+﻿$(document).ready(function () {
     $("#btnInsertar").click(function () {
         ProcesarComando("POST");
     });
@@ -12,20 +9,19 @@ $(document).ready(function () {
         ProcesarComando("DELETE");
     });
     $("#btnConsultar").click(function () {
-        ConsultarAhorro();
+        ConsultarPrestamos();
     });
-    //LlenarGridBicicleta();
-    llenarGridAhorro();
+    llenarGridPrestamo();
     LLenarComboCliente();
 });
-function llenarGridAhorro() {
+function llenarGridPrestamo() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:50094/api/Campos",
+        url: "http://localhost:50094/api/Campos?Id=1",
         dataType: "json",
         data: null,
         success: function (grdCampos) {
-            LlenarGridDatos(grdCampos, "#tblAhorros");
+            LlenarGridDatos(grdCampos, "#tblPrestamo");
         },
         error: function (ErrorSuper) {
             $("#dvMensaje").addClass("alert alert-warning");
@@ -51,31 +47,33 @@ function LLenarComboCliente() {
         }
     });
 }
-function ConsultarAhorro() {
-    var IDAhorro = $("#txtIdAhorro").val();
+function ConsultarPrestamos() {
+    var IDPrestamo = $("#txtIdPrestamo").val();
     $.ajax({
         type: "GET",
-        url: "http://localhost:50094/api/Ahorrar?AhorroID=" + IDAhorro,
+        url: "http://localhost:50094/api/Prestamo?PrestamoID=" + IDPrestamo,
         dataType: "json",
         data: null,
-        success: function (RptaAhorro) {
-            if (RptaAhorro == null) {
+        success: function (RptaPrestamo) {
+            if (RptaPrestamo == null) {
                 $("#dvMensaje").addClass("alert alert-danger");
-                $("#dvMensaje").html("No Hay Datos Asociados al Documento: " + IDAhorro);
-                $("#txtIdAhorro").val("");
+                $("#dvMensaje").html("No Hay Datos Asociados al Ahorro: " + IDPrestamo);
+                $("#txtIdPrestamo").val("");
                 $("#cboCliente").val("");
-                $("#txtFechaAhorro").val("");
-                $("#txtCantidadAhorro").val("");
+                $("#txtValorPrestado").val("");
+                $("#txtFechaPrestamo").val("");
+                $("#txtInteres").val("");
+                $("#txtValorTotalPrestamo").val("");
             } else {
-                //$("#txtDocumentoCliente").val(RptaSuper.Nombre);
-                $("#txtIdAhorro").val(RptaAhorro.IDAhorro);
-                $("#cboCliente").val(RptaAhorro.IDCliente);
-                var Fechas = RptaAhorro.FechaAhorro.split('T')[0];
-                $("#txtFechaAhorro").val(Fechas);
-                $("#txtCantidadAhorro").val(RptaAhorro.ValorAhorrado);
+                console.log(RptaPrestamo);
+                $("#txtIdPrestamo").val(RptaPrestamo.IDPrestamo);
+                $("#cboCliente").val(RptaPrestamo.IDCliente);
+                var Fechas = RptaPrestamo.FechaPrestamo.split('T')[0];
+                $("#txtValorPrestado").val(RptaPrestamo.ValorPrestado);
+                $("#txtFechaPrestamo").val(Fechas);
+                $("#txtInteres").val(RptaPrestamo.InteresPor);
+                $("#txtValorTotalPrestamo").val(RptaPrestamo.ValorTotalPrestamo);
                 llenarCamposCliente();
-
-
                 $("#dvMensaje").removeClass("alert alert-danger");
                 $("#dvMensaje").html("");
             }
@@ -89,7 +87,7 @@ function llenarCamposCliente() {
     var DocumentoCliente = $("#cboCliente").val();
     $.ajax({
         type: "GET",
-        url: "http://localhost:50094/api/Campos?Documento="+DocumentoCliente,
+        url: "http://localhost:50094/api/Campos?Documento=" + DocumentoCliente,
         dataType: "json",
         data: null,
         success: function (RptaCamposCliente) {
@@ -107,22 +105,25 @@ function llenarCamposCliente() {
 
 
 function ProcesarComando(Comando) {
-    var IDAhorro = $("#txtIdAhorro").val();
+    var IDPrestamo = $("#txtIdPrestamo").val();
     var IDCliente = $("#cboCliente").val();
-    var FechaAhorro = $("#txtFechaAhorro").val();
-    var ValorAhorrado = $("#txtCantidadAhorro").val();
-    if (IDAhorro == "") {
+    var FechaPrestamo = $("#txtFechaPrestamo").val();
+    var ValorPrestado = $("#txtValorPrestado").val();
+    var InteresPor = $("#txtInteres").val();
+    var ValorTotalPrestamo = $("#txtValorTotalPrestamo").val();
+
+    if (IDPrestamo == "") {
         $("#dvMensaje").addClass("alert alert-danger");
-        $("#dvMensaje").html("Ingrese el Numero del Ahorro");
+        $("#dvMensaje").html("Ingrese el Numero del Prestamo");
         return;
     } else {
         $("#dvMensaje").removeClass("alert alert-danger");
         $("#dvMensaje").html("");
     }
     if (Comando == 'POST') {
-        if (ValorAhorrado == "") {
+        if (ValorPrestado == "") {
             $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html("Ingrese la cantidad que desea ahorrar");
+            $("#dvMensaje").html("Ingrese el valor prestado");
             return;
         } else {
             $("#dvMensaje").removeClass("alert alert-danger");
@@ -130,37 +131,38 @@ function ProcesarComando(Comando) {
         }
         if (IDCliente == "" || IDCliente == null || IDCliente == 'undefined' || IDCliente == 0) {
             $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html("Seleccione el Cliente que Desea Ingresar su ahorrro");
+            $("#dvMensaje").html("Seleccione el Cliente que Desea Ingresar su Prestamo");
             return;
         } else {
             $("#dvMensaje").removeClass("alert alert-danger");
             $("#dvMensaje").html("");
         }
-        if (FechaAhorro == null || FechaAhorro == '' || FechaAhorro == 'undefined') {
-            FechaAhorro = '1900/01/01';
+        if (FechaPrestamo == null || FechaPrestamo == '' || FechaPrestamo == 'undefined') {
+            FechaPrestamo = '1900/01/01';
         }
     }
-    var DatosAhorro = {
-        IDAhorro: IDAhorro,
+    var DatosPrestamo = {
+        IDPrestamo: IDPrestamo,
         IDCliente: IDCliente,
-        FechaAhorro: FechaAhorro,
-        ValorAhorrado: ValorAhorrado
+        FechaPrestamo: FechaPrestamo,
+        ValorPrestado: ValorPrestado,
+        InteresPor: InteresPor,
+        ValorTotalPrestamo: ValorTotalPrestamo
     }
     console.log('Datos para enviar');
-    console.log(DatosAhorro);
+    console.log(DatosPrestamo);
     $.ajax({
         type: Comando,
-        url: "http://localhost:50094/api/Ahorrar",
+        url: "http://localhost:50094/api/Prestamo",
         dataType: "json",
-        data:DatosAhorro,
-        success: function (RptaAhorro) {
+        data: DatosPrestamo,
+        success: function (RptaPrestamo) {
             $("#dvMensaje").addClass("alert alert-success");
-            $("#dvMensaje").html(RptaAhorro);
-            llenarGridAhorro();
+            $("#dvMensaje").html(RptaPrestamo);
+            llenarGridPrestamo();
         },
         error: function (RptaError) {
             alert("Error: " + RptaError);
         }
     });
-
 }
